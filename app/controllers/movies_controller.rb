@@ -3,26 +3,36 @@ class MoviesController < ApplicationController
     @movies = Movie.all
   end
 
+  #READ
   def show
-    @movie = Movie.find(params[id])
+    @movie = Movie.find(params["id"])
+    render("movies/show.html.erb")
   end
 
+
+
+  #CREATE
   def new_form
+    render("movies/new_form.html.erb")
   end
 
   def create_row
+    @movie = Movie.new
     @movie.title = params[:the_title]
     @movie.year = params[:the_year]
     @movie.duration = params[:the_duration]
     @movie.description = params[:the_description]
     @movie.image_url = params[:the_image_url]
     @movie.director_id = params[:the_director_id]
-
     @movie.save
 
-    render("show")
+    render("movies/show/#{@movie.id}")
   end
 
+
+
+
+  #UPDATE
   def edit_form
     @movie = Movie.find(params[:id])
   end
@@ -38,9 +48,9 @@ class MoviesController < ApplicationController
     render("show")
   end
 
+  #DELETE
   def destroy
-    movie = Movie.find(params[:id])
-
-    movie.destroy
+    @movie = Movie.find(params[:id]).destroy
+    render("movies/destroy.html.erb")
   end
 end

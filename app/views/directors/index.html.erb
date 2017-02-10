@@ -18,7 +18,7 @@
   </thead>
 
   <tbody>
-    <% @directors.each do |director| %>
+    <% @director.each do |director| %>
       <tr>
         <td><img src="<%= director.image_url %>" width="80"></td>
         <td><%= director.dob %></td>
@@ -43,4 +43,3 @@
     <% end %>
   </tbody>
 </table>
-
