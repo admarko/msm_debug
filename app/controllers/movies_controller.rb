@@ -26,7 +26,7 @@ class MoviesController < ApplicationController
     @movie.director_id = params[:the_director_id]
     @movie.save
 
-    render("movies/show/#{@movie.id}")
+    render("movies/show.html.erb")
   end
 
 
@@ -35,17 +35,29 @@ class MoviesController < ApplicationController
   #UPDATE
   def edit_form
     @movie = Movie.find(params[:id])
+    render("movies/edit_form.html.erb")
   end
 
   def update_row
-    @movie.title = params[:title]
-    @movie.year = params[:year]
-    @movie.duration = params[:duration]
-    @movie.description = params[:description]
-    @movie.image_url = params[:image_url]
-    @movie.director_id = params[:director_id]
+    @movie = Movie.find(params["id"])
+    @id = params["id"]
+    @title = params[:title]
+    @year = params[:year]
+    @duration = params[:duration]
+    @description = params[:description]
+    @image_url = params[:image_url]
+    @director_id = params[:director_id]
 
-    render("show")
+    @movie = Movie.find(params["id"])
+    @movie.title = @title
+    @movie.year = @year
+    @movie.duration = @duration
+    @movie.description = @description
+    @movie.image_url = @image_url
+    @movie.director_id = @director_id
+    @movie.save
+
+    render("movies/show.html.erb")
   end
 
   #DELETE
